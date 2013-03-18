@@ -1,20 +1,23 @@
 require 'spec_helper'
 
 module House
-  class Entries
-    class << self
-      def latest
-        []
-      end
+  class Parser
+    def initialize(feed)
+      @feed = feed
+    end
+
+    def entries
+      []
     end
   end
 end
 
 
-describe House::Entries do
-  
+describe House::Parser do
+  let(:feed) { Nokogiri::HTML File.open("./spec/fixtures/sample.html") }
+
   it "should list latest entries" do
-    House::Entries.latest.should == [
+    House::Parser.new(feed).entries.should == [
       [
         "http://mindemyhouse.com/foobar.html",
         "Lovely House Sit in France"
