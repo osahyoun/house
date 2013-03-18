@@ -1,5 +1,16 @@
 require 'spec_helper'
 
+module House
+  class Entries
+    class << self
+      def latest
+        []
+      end
+    end
+  end
+end
+
+
 describe House::Entries do
   
   it "should list latest entries" do
