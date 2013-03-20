@@ -12,6 +12,10 @@ module House
       @data.css('h2.title a')[0]['href']
     end
 
+    def url
+      "http://mindmyhouse.com#{path}"
+    end
+
     def title
       @data.css('h2.title').text
     end
@@ -20,5 +24,15 @@ module House
       @data.css('p.description').text
     end
 
+    def location
+      @data.css('li.location').text
+    end
+
+    def to_hash
+      { title: title,
+        url: url,
+        location: location,
+        description: description }
+    end
   end
 end
