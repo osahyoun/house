@@ -4,16 +4,15 @@ describe House::Parser do
   let(:feed) { Nokogiri::HTML File.open("./spec/fixtures/sample.html") }
 
   it "should list latest entries" do
-    House::Assignments.latest(feed).should == [
-      [
-        "http://mindemyhouse.com/foobar.html",
-        "Lovely House Sit in France"
-      ], 
-      [
-        "http://mindemyhouse.com/foobar.html",
-        "Lovely House Sit in France"
-      ]
-    ]
+    assignments = House::Assignments.latest(feed)
+    assignments.length.should == 3
+
+    assignments.first.should == {
+      title: "One month this summer near S.F.", 
+      url: "http://mindmyhouse.com/sitters/assignment/1", 
+      location: "United States, Mill Valley", 
+      description: "Responsible, mature non-smoking single person or couple."
+    }
   end
 
 end
